@@ -1,9 +1,9 @@
 # Web前端
 [ditto:searchbar]
 
-## HTML
-- [meta](#docs/html/meta)
-- [link](#docs/html/link)
+## PHP
+- [变量](#docs/php/variable)
+- [常量](#docs/php/constant)
 
 ## CSS
 - [reset.css](#docs/css/reset)
