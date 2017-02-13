@@ -11,6 +11,7 @@
 
 ## PHP进阶
 - [数组](#docs/phpc/array)
+- [函数](#docs/phpc/function)
 
 
 ## Javascript
