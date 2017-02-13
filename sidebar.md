@@ -10,7 +10,7 @@
 - [Zend Studio开发工具使用](#docs/php/zend)
 
 ## PHP进阶
-- [reset.css](#docs/php_ad/array)
+- [数组](#docs/phpc/array)
 
 
 ## Javascript
