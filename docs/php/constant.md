@@ -1,274 +1,120 @@
-###打印一串字符。
-```php
-<?php
-  echo 'PHP学到家，走到哪儿都不怕！';
-?>
-```
+###PHP-什么是常量
 
-###输出23+6的计算结果
-```php
-<?php
-  echo 23+6;
-?>
-```
+什么是常量？常量可以理解为值不变的量（如圆周率）；或者是常量值被定义后，在脚本的其他任何地方都不可以被改变。PHP中的常量分为自定义常量和系统常量
 
-### .连接符
-```php
-<?php
-  echo "Good,"."morning!";
-?>
-```
+>$p = "PII";define($p,3.14);等同于define("PI",3.14);
 
-###注释
 ```php
 <?php
-    //echo "欢迎同学们！";
-  echo 1+2+3+4+5;
-?>
-```
-
-###什么是变量
-```php
-<?php
-    $var = "学PHP";
-    echo $var;
+  $p = "PII";
+  define("PI",3.14);
+  define($p,3.14);
+  echo PI;
   echo "<br />";
-  $var = "共同进步";
-  echo $var;
+  echo PII;
 ?>
+//3.14
+//3.14
 ```
 
-###”var_dump”函数可以将我们的变量的数据类型显示出来。
+
+
+
+
+###PHP-常量的作用
+
+常量主要功效是可以避免重复定义，篡改变量值。在我们进行团队开发时，或者代码量很大的时候，对于一些第一次定义后不改变的量，如果我们使用变量，在不知情的情况下，使用同一变量名时，变量值就会被替换掉，从而会引发服务器执行错误的任务。
+
+此外，使用常量还能提高代码的可维护性。如果由于某些原因，常量的值需要变更时候，我们只需要修改一个地方。例如在做计算中，起初我们取圆周率为3.14，于是很多计算中我们都使用3.14进行计算，当要求计算精度提高，圆周率需要取3.142的时候，我们不得不修改所有使用3.14的代码，倘若代码量比较多时，不仅工作量大，还可能遗漏。
+
 ```php
 <?php
-    $var_name = "苹果";
-  $n =10;
-  var_dump($var_name);
-  var_dump($n);
+define("PI",3.14);
+$r=3;
+echo "面积为:".(PI*$r*$r)."<br />";
+echo "周长为:".(2*PI*$r)."<br />";
 ?>
-//string(6) "苹果" int(10) 
+//面积为:28.26
+//周长为:18.84
 ```
 
+###PHP-认识一下系统常量
 
 
-###通过使用“memory_get_usage”获取当前PHP消耗的内存。
+
+系统常量是PHP已经定义好的常量，我们可以直接拿来使用，常见的系统常量有：
+
+（1）__FILE__ :php程序文件名。它可以帮助我们获取当前文件在服务器的物理位置。
+
+（2）__LINE__ :PHP程序文件行数。它可以告诉我们，当前代码在第几行。
+
+（3）PHP_VERSION:当前解析器的版本号。它可以告诉我们当前PHP解析器的版本号，我们可以提前知道我们的PHP代码是否可被该PHP解析器解析。
+
+（4）PHP_OS：执行当前PHP版本的操作系统名称。它可以告诉我们服务器所用的操作系统名称，我们可以根据该操作系统优化我们的代码。
+
+
 ```php
-<?php 
-  echo $m1 = memory_get_usage(); 
+<?php
+  echo __FILE__;
   echo "<br />";
-  $var_string = "123";
-  echo $m2 = memory_get_usage()-$m1; 
+  echo __LINE__;
   echo "<br />";
-  $n=123;
-  echo $m3 = memory_get_usage()-$m1-$m2; 
+  echo PHP_VERSION;
   echo "<br />";
-  $f=123.00;
-  echo $m4 = memory_get_usage()-$m1-$m2-$m3; 
+  echo PHP_OS;
   echo "<br />";
-  $var_array = array("123");
-  echo $m5 = memory_get_usage()-$m1-$m2-$m3-$m4; 
 ?>
-//322696
-//184
-//160
-//160
-//352
-//$m1相当于初始化的时候消耗的内存，memory_get_usage()这个函数是到当前这一步为止一共消耗多少内存。然后，一减就得到当前这一步消耗的内存。
+//D:\phpStudy\WWW\php_Introduction\index.php
+//11
+//5.5.30
+//WINNT
 ```
 
+###PHP-常量如何取值
 
-###PHP变量的数据类型
+>mixed constant(string constant_name)
 
-var_dump()方法是判断一个变量的类型与长度,并输出变量的数值,如果变量有值输的是变量的值并回返数据类型.
+第一个参数constant_name为要获取常量的名称，也可为存储常量名的变量。如果成功则返回常量的值，失败则提示错误信息常量没有被定义。
 
 ```php
 <?php 
-  $string = "就是就是";
-  var_dump($string);
-  echo "<br />";
-  $string = 9494;
-  var_dump($string);
-  echo "<br />";
+$p="";
+//定义圆周率的两种取值
+define("PI1",3.14);
+define("PI2",3.142);
+//定义值的精度
+$height = "中";
+//根据精度返回常量名，将常量变成了一个可变的常量
+if($height == "中"){
+    $p = "PI1";
+}else if($height == "低"){
+  $p = "PI2";
+}
+$r=1;
+$area= constant($p)*$r*$r;
+echo $area;
 ?>
-//string(12) "就是就是" 
-//int(9494)
-//不必向PHP声明变量的数据类型，PHP会自动把变量转换为自动的数据类型
-//通过“var_dump”函数，输出数据类型。
+//3.14
 ```
 
-###PHP标量类型—布尔类型
-```php
-<?php 
-    $man = "男";
-  $flag = $man == "男";
-  echo $flag ;
-  echo "<br />" ;
-  var_dump($flag);
-?>
-//1
-//bool(true)
+###PHP-如何判定常量是否被定义
 
-//$flag = $man == "男";
-//php中运算符有优先级，和平时做加减乘除的运算优先级类似，==的优先级高于=，所以先计算$man == "男"，返回结果是TRUE或者FALSE,第二步拿上一步的计算结果给$flag赋值，所以$flag=TRUE或者$flag=FALSE，$flag就是布尔型
-```
+如果常量被重复定义以后，PHP解析器会发出“Constant XXX already defined”的警告，提醒我们该常量已经被定义过。那么，在团队开发，或代码量很大的情况下，我们如何去判定一个常量是否被定义呢？
 
-###PHP标量类型—整型
-```php
-<?php
-  $data_int1 = 123;     //123十进制数
-  echo $data_int1;
-  echo "<br />";
-  $data_int2 = -123;    //-123一个负数
-  echo $data_int2;
-  echo "<br />";
-  $data_int3 = 0123;    //83八进制数
-  echo $data_int3;
-  echo "<br />";
-  $data_int4 = 0x123;   //291十六进制数
-  echo $data_int4;
-  echo "<br />";
-?>
-```
+defined()函数可以帮助我们判断一个常量是否已经定义，其语法格式为：
 
+    bool defined(string constants_name)
 
-###PHP标量类型—浮点型
-
->e3是10的三次方，E-3是10的-3次方
-
-```php
-<?php
-  $num_float1=1.234;
-  echo $num_float1;
-  echo "<br />";
-  $num_float2=1.2e3;
-  echo $num_float2;
-  echo "<br />";
-  $num_float3=7.0E-3;
-  echo $num_float3;
-  echo "<br />";
-?>
-//1.234
-//1200
-//0.007
-```
-
-
-###PHP标量类型—字符串（1）
-```php
-<?php
-  $str_string1 = '我是字符串';
-  $str_string2 = "我也是字符串哦";
-  echo $str_string1;
-  echo "<br />";
-  echo $str_string2;
-?>
-//我是字符串
-//我也是字符串哦
-```
-
-###PHP标量类型—字符串（2）
-```php
-<?php 
-  $str_string1 = '甲问："你在哪里学的PHP？"';
-  $str_string2 = "乙毫不犹豫地回答：'菜鸟网'";
-  $str_string3 = '甲问:\'能告诉我网址吗？\'';
-  $str_string4 = "乙答道:\"http://www.huanghanlian.com/\"";
-  echo $str_string1;
-  echo "<br />";
-  echo $str_string2;
-  echo "<br />";
-  echo $str_string3;
-  echo "<br />";
-  echo $str_string4;
-  echo "<br />";
-?>
-//甲问："你在哪里学的PHP？"
-//乙毫不犹豫地回答：'菜鸟网'
-//甲问:'能告诉我网址吗？'
-//乙答道:"http://www.huanghanlian.com/"
-```
-
-###PHP标量类型—字符串（3）
-
->当双引号中包含变量时，变量会与双引号中的内容连接在一起；
-当单引号中包含变量时，变量会被当做字符串输出。
-
-```php
-<?php
-  $love = "I love you!";
-  $string1 = "继小鹏,$love";
-  $string2 = '继小鹏,$love';
-  echo $string1;
-  echo "<br />";
-  echo $string2;
-?>
-//继小鹏,I love you!
-//继小鹏,$love
-```
-
-###PHP标量类型—字符串（4）
-
->只要用了<<<之后用相同的字母为起点。和结尾都可以了
-
-```php
-<?php
-$string1=<<<GOD
-我有一只小毛驴，我从来也不骑。
-有一天我心血来潮，骑着去赶集。
-我手里拿着小皮鞭，我心里正得意。
-不知怎么哗啦啦啦啦，我摔了一身泥.
-GOD;
-
-echo $string1;
-?>
-```
-
-###PHP第一种特殊类型—资源
-
-资源（resource）：资源是由专门的函数来建立和使用的，例如打开文件、数据连接、图形画布。我们可以对资源进行操作（创建、使用和释放）。任何资源，在不需要的时候应该被及时释放。如果我们忘记了释放资源，系统自动启用垃圾回收机制，在页面执行完毕后回收资源，以避免内存被消耗殆尽。
+它只有参数constant_name，指的是要获取常量的名称，若存在则返回布尔类型true，否则返回布尔类型false; （注：bool表示函数返回值类型为布尔类型）
 
 ```php
 <?php 
-  //首先采用“fopen”函数打开文件，得到返回值的就是资源类型。
-  $file_handle = fopen("f.txt","r");
-  if ($file_handle){
-      //接着采用while循环（后面语言结构语句中的循环结构会详细介绍）一行行地读取文件，然后输出每行的文字
-      while (!feof($file_handle)) { //判断是否到最后一行
-          $line = fgets($file_handle); //读取一行文本
-          echo $line; //输出一行文本
-          echo "<br />"; //换行
-      }
-  }
-  fclose($file_handle);//关闭文件
+define("PI1",3.14);
+$p = "PI1";
+$is1 = defined($p);
+$is2 = defined("PI2");
+var_dump($is1);
+var_dump($is2);
 ?>
-
-//解释
-
-$a = fopen("打开文件根目录","r");//打开文件
-$b = fgets($a);//读取文件中的内容
-$c = fclose($a);//关闭文件
+//bool(true) bool(false)
 ```
-
-
-###PHP第二种特殊类型—空类型
-
-NULL（NULL）：NULL是空类型，对大小写不敏感，NULL类型只有一个取值，表示一个变量没有值，当被赋值为NULL，或者尚未被赋值，或者被unset()，这三种情况下变量被认为为NULL。
-
->unset是将变量删除，成功则返回 true 值
-error_reporting禁止显示php警告提示
-
-```php
-<?php
-  error_reporting(0); //禁止显示PHP警告提示
-  $var;
-  var_dump($var);
-  $var1 = null;
-  var_dump($var1);
-  $var2 = NULL;
-  var_dump( $var2);
-  $var3 = "节日快乐！";
-  “unset($var3);
-  var_dump($var3);
-?>
-```
-
