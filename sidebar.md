@@ -13,6 +13,7 @@
 - [数组](#docs/phpc/array)
 - [函数](#docs/phpc/function)
 - [类与面向对象](#docs/phpc/oriented)
+- [字符串操作](#docs/phpc/string)
 
 
 
