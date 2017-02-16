@@ -16,6 +16,7 @@
 - [字符串操作](#docs/phpc/string)
 - [正则表达式](#docs/phpc/regexp)
 - [会话控制(session与cookie)](#docs/phpc/session_cookie)
+- [文件系统](#docs/phpc/file)
 
 
 
