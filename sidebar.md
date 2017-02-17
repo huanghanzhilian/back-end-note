@@ -18,7 +18,7 @@
 - [会话控制(session与cookie)](#docs/phpc/session_cookie)
 - [文件系统](#docs/phpc/file)
 - [日期和时间](#docs/phpc/date_time)
-
+- [图形图像操作](#docs/phpc/graphic_device)
 
 
 
